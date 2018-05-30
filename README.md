@@ -1,4 +1,3 @@
-# ArmadaBox
-Automated Server for Consuming Media on ARM architecture
-
+# ARMADA
+ARM Automation with Dockers/Ansible
 # Built for Arm
