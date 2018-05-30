@@ -1,3 +1,3 @@
 # ARMADA
-ARM Automation with Dockers/Ansible
+ARM - Ansible - Docker - Automation (for consuming media)
 # Built for Arm
