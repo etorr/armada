@@ -1,0 +1,37 @@
+#!/bin/bash
+
+---
+- name: Remove Current Sonarr container
+  docker_container:
+    name: sonarr
+    state: absent
+
+- name: Initialize Folders Sonarr
+  file: "path={{item}} state=directory mode=0775 owner=1000 group=1000"
+  with_items:
+    - /opt/sonarr
+
+- name: Pull container and Initialize
+  docker_container:
+    name: sonarr
+    image: "lsioarmhf/sonarr-aarch64"
+    pull: yes
+    published_ports:
+      - "127.0.0.1:8989:8989"
+    env:
+      APP: "sonarr"
+      VERSION: "unstable"
+      BACKUP: "no"
+      PUID: "1000"
+      PGID: "1000"
+      MONO_TLS_PROVIDER: legacy
+    networks:
+      - name: armada
+        aliases:
+          - "sonarr"
+    volumes:
+      - "/mnt:/mnt"
+      - /etc/localtime:/etc/localtime:ro
+    restart_policy: always
+    state: started
+

@@ -1,0 +1,5 @@
+---
+- hosts: localhost
+
+  roles:
+    - { role: sonarr-arm64, tags: ['sonarr-arm64', 'full'] }
