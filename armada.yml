@@ -3,3 +3,4 @@
 
   roles:
     - { role: sonarr-armhf, tags: ['sonarr-armhf', 'armhf'] }
+    - { role: docker-armhf, tags: ['docker-armhf', 'armhf'] }  
