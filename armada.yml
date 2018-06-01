@@ -3,7 +3,7 @@
 
   roles:
     - { role: init_check, tags: ['armhf'] }
-    - { role: kernel_update, tags: ['armhf'] }
+      # - { role: kernel_update, tags: ['armhf'] }
     - { role: prep_install, tags: ['armhf'] }
     - { role: docker-armhf, tags: ['docker-armhf', 'armhf'] }
     - { role: sonarr-armhf, tags: ['sonarr-armhf', 'armhf'] }
