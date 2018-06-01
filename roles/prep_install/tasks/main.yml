@@ -1,89 +1,89 @@
 ---
- - name: Install common packages
-   apt: "name={{item}} state=present"
-   with_items:
-     - fuse
-     - nano
-     - fail2ban
-     - wget
-     - lsb-release
-     - figlet
-     - update-motd
-     - update-notifier-common
-     - unionfs-fuse
-     - software-properties-common
-     - unrar
-     - unzip
-     - glances
-     - python-pip
-     - python3-pip
-     - python-passlib
-     - zip
-     - curl
-     - man-db
-     - htop
-     - openssh-server
-     - dirmngr
-     - npm
-     - zip
-     - apt-transport-https
-     - ca-certificates
-     - tree
-     - ncdu
-     - ctop
-     - dialog
-     - dnsutils
-     - mc
-     - apache2-utils
-     - lsof
-     - pwgen
-     - gawk
-   ignore_errors: yes
+- name: Install common packages
+  apt: "name={{item}} state=present"
+  with_items:
+    - fuse
+    - nano
+    - fail2ban
+    - wget
+    - lsb-release
+    - figlet
+    - update-motd
+    - update-notifier-common
+    - unionfs-fuse
+    - software-properties-common
+    - unrar
+    - unzip
+    - glances
+    - python-pip
+    - python3-pip
+    - python-passlib
+    - zip
+    - curl
+    - man-db
+    - htop
+    - openssh-server
+    - dirmngr
+    - npm
+    - zip
+    - apt-transport-https
+    - ca-certificates
+    - tree
+    - ncdu
+    - ctop
+    - dialog
+    - dnsutils
+    - mc
+    - apache2-utils
+    - lsof
+    - pwgen
+    - gawk
+  ignore_errors: yes
 
- - name: Pip Installs
-   pip: "name={{item}} state=latest"
-   with_items:
-     - docker-py
-     - certbot
-     - ansible-toolbox
-     - passlib 
+- name: Pip Installs
+  pip: "name={{item}} state=latest"
+  with_items:
+    - docker-py
+    - certbot
+    - ansible-toolbox
+    - passlib 
 
- - name: Remove symbolic
-   shell: unlink /etc/ansible/roles
-   ignore_errors: yes
+- name: Remove symbolic
+  shell: unlink /etc/ansible/roles
+  ignore_errors: yes
+
+- name: check gdrive for rclone
+  stat:
+    path: /mnt/gdrive
+  register: gdrive_mnt
+
+- name: create gdrive
+  file:
+   path: /mnt/gdrive
+   state: directory
+   mode: 0755
+   owner: 1000
+   group: 1000
+   recurse: yes
+  when: gdrive_mnt.stat.exists == False
+
+- name: set /opt permissions
+  shell: "chmod -R ugo+X /opt"
+  args:
+   warn: no
  
- - name: check gdrive for rclone
-   stat:
-     path: /mnt/gdrive
-   register: gdrive_mnt
+- name: set /opt owner
+  shell: "chown -R 1000:1000 /opt"
+  args:
+    warn: no
 
- - name: create gdrive
-   file:
-     path: /mnt/gdrive
-     state: directory
-     mode: 0755
-     owner: 1000
-     group: 1000
-     recurse: yes
-   when: gdrive_mnt.stat.exists == False
 
- - name: set /opt permissions
-   shell: "chmod -R ugo+X /opt"
-   args:
-     warn: no
+- name: Remove a Folder
+  file:
+    state: absent
+    path: /etc/ansible/roles
+  ignore_errors: yes
  
- - name: set /opt owner
-   shell: "chown -R 1000:1000 /opt"
-   args:
-     warn: no
-
-
- - name: Remove a Folder
-   file:
-     state: absent
-     path: /etc/ansible/roles
-   ignore_errors: yes
- 
- - name: create symbolic
-   shell: ln -s /opt/armada/roles /etc/ansible
-   ignore_errors: yes 
+- name: create symbolic
+  shell: ln -s /opt/armada/roles /etc/ansible
+  ignore_errors: yes 
