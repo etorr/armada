@@ -51,8 +51,8 @@
   file: "path=/etc/systemd/system/docker.service.d state=directory mode=0775"
   when: docker_override.stat.exists == False
 
-- name: import override file
-  copy: "src=override.conf dest/etc/systemd/system/docker.service.d/override.conf force=yes mode=0775"
+- name: import override.conf
+  copy: "src=override.conf dest=/etc/systemd/system/docker.service.d/override.conf force=yes mode=0775"
 
 - name: create armada network
   docker_network:

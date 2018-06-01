@@ -17,7 +17,7 @@
     image: "lsioarmhf/sonarr"
     pull: yes
     published_ports:
-      - "127.0.0.1:8989:8989"
+      - "0.0.0.0:8989:8989"
     env:
       APP: "sonarr"
       VERSION: "unstable"
