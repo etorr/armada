@@ -1,0 +1,11 @@
+---
+- name: system
+  debug:
+    msg: "system is running {{ansible_distribution}} {{ansible_distribution_version}}"
+  tags: always
+
+- name: Check Compatible OS
+  fail: msg="This requires Ubuntu 16.04 or higher"
+  when: ansible_distribution_version is version_compare('16.04', '<')
+  tags: always
+
