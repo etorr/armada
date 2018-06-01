@@ -31,7 +31,7 @@ apt-get install -y --reinstall \
     python3-dev \
     python3-pip \
     python-dev \
-    python-pip \
+    python-pip 
 python3 -m pip install --disable-pip-version-check --upgrade --force-reinstall pip==9.0.3
 python3 -m pip install --disable-pip-version-check --upgrade --force-reinstall setuptools
 python3 -m pip install --disable-pip-version-check --upgrade --force-reinstall \
