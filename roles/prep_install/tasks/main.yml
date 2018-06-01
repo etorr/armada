@@ -12,7 +12,6 @@
     - update-notifier-common
     - unionfs-fuse
     - software-properties-common
-    - unrar
     - unzip
     - glances
     - python-pip
