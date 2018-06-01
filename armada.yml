@@ -2,4 +2,4 @@
 - hosts: localhost
 
   roles:
-    - { role: sonarr-arm64, tags: ['sonarr-arm64', 'full'] }
+    - { role: sonarr-armhf, tags: ['sonarr-armhf', 'armhf'] }

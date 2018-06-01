@@ -14,7 +14,7 @@
 - name: Pull container and Initialize
   docker_container:
     name: sonarr
-    image: "lsioarmhf/sonarr-aarch64"
+    image: "lsioarmhf/sonarr"
     pull: yes
     published_ports:
       - "127.0.0.1:8989:8989"
