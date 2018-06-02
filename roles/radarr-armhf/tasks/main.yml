@@ -1,0 +1,37 @@
+#!/bin/bash
+
+---
+- name: Remove Current radarr container
+  docker_container:
+    name: radarr
+    state: absent
+
+- name: Initialize Folders radarr
+  file: "path={{item}} state=directory mode=0775 owner=1000 group=1000"
+  with_items:
+    - /opt/radarr
+
+- name: Pull container and Initialize
+  docker_container:
+    name: radarr
+    image: "lsioarmhf/radarr"
+    pull: yes
+    published_ports:
+      - "0.0.0.0:7878:7878"
+    env:
+      APP: "radarr"
+      VERSION: "unstable"
+      BACKUP: "no"
+      PUID: "1000"
+      PGID: "1000"
+      MONO_TLS_PROVIDER: legacy
+    networks:
+      - name: armada
+        aliases:
+          - "sonarr"
+    volumes:
+      - "/mnt:/mnt"
+      - /etc/localtime:/etc/localtime:ro
+    restart_policy: always
+    state: started
+

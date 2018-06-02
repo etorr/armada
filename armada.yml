@@ -7,3 +7,6 @@
     - { role: prep_install, tags: ['armhf'] }
     - { role: docker-armhf, tags: ['docker-armhf', 'armhf'] }
     - { role: sonarr-armhf, tags: ['sonarr-armhf', 'armhf'] }
+    - { role: radarr-armhf, tags: ['radarr-armhf', 'armhf'] }
+    - { role: organizr-armhf, tags: ['organizr-armhf', 'armhf'] }
+      
