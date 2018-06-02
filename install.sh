@@ -11,8 +11,8 @@ apt-get update
 apt-get install -y --reinstall software-properties-common
 
 ## add repository keys
-add-apt-repository -y "deb http://ports.ubuntu.com/ubuntu-ports xenial-updates InRelease main"
-add-apt-repository -y "deb http://ports.ubuntu.com xenial-updates InRelease main"
+add-apt-repository -y "deb http://ports.ubuntu.com/ubuntu-ports xenial-updates main"
+add-apt-repository -y "deb http://ports.ubuntu.com xenial-updates main"
 add-apt-repository -y ppa:ansible/ansible
 
 ## add more dependencies
@@ -56,4 +56,5 @@ git clone https://github.com/etorr/armada /opt/armada
 ## install armada
 cd /opt/armada
 ansible-playbook armada.yml --tags armhf
-
+apt-add-repository -y --remove "deb http://ports.ubuntu.com/ubuntu-ports xenial-updates main" 
+add-apt-repository -y --remove "deb http://ports.ubuntu.com xenial-updates main" 
