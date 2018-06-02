@@ -1,25 +1,25 @@
 #!/bin/bash
 
 ---
-- name: Remove Current Organizr container
+- name: Remove Current jackett container
   docker_container:
-    name: organizr
+    name: jackett
     state: absent
 
-- name: Initialize Folders organizr
+- name: Initialize Folders jackett
   file: "path={{item}} state=directory mode=0775 owner=1000 group=1000"
   with_items:
-    - /opt/organizr
+    - /opt/jackett
 
 - name: Pull container and Initialize
   docker_container:
-    name: organizr
-    image: "lsioarmhf/organizr"
+    name: jackett
+    image: "lsioarmhf/jackett"
     pull: yes
     published_ports:
-      - "0.0.0.0:8080:80"
+      - "0.0.0.0:9117:9117"
     env:
-      APP: "organizr"
+      APP: "jackett"
       VERSION: "unstable"
       BACKUP: "no"
       PUID: "1000"
@@ -28,7 +28,7 @@
     networks:
       - name: armada
         aliases:
-          - "organizr"
+          - "jackett"
     volumes:
       - "/mnt:/mnt"
       - /etc/localtime:/etc/localtime:ro

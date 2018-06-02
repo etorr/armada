@@ -9,4 +9,5 @@
     - { role: sonarr-armhf, tags: ['sonarr-armhf', 'armhf'] }
     - { role: radarr-armhf, tags: ['radarr-armhf', 'armhf'] }
     - { role: organizr-armhf, tags: ['organizr-armhf', 'armhf'] }
-      
+    - { role: jackett-armhf, tags: ['jackett-armhf', 'armhf'] }
+    - { role: ombi-armhf, tags: ['ombi-armhf', 'armhf'] }

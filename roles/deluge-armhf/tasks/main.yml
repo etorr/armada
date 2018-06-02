@@ -1,25 +1,27 @@
 #!/bin/bash
 
 ---
-- name: Remove Current Organizr container
+- name: Remove Current Deluge container
   docker_container:
-    name: organizr
+    name: deluge
     state: absent
 
-- name: Initialize Folders organizr
+- name: Initialize Folders Deluge
   file: "path={{item}} state=directory mode=0775 owner=1000 group=1000"
   with_items:
-    - /opt/organizr
+    - /opt/deluge
 
 - name: Pull container and Initialize
   docker_container:
-    name: organizr
-    image: "lsioarmhf/organizr"
+    name: deluge
+    image: "lsioarmhf/deluge"
     pull: yes
     published_ports:
-      - "0.0.0.0:8080:80"
+      - "0.0.0.0:8112:8112"
+      - "58846:58846"
+      - "58946:58946"
     env:
-      APP: "organizr"
+      APP: "deluge"
       VERSION: "unstable"
       BACKUP: "no"
       PUID: "1000"
@@ -28,7 +30,7 @@
     networks:
       - name: armada
         aliases:
-          - "organizr"
+          - "deluge"
     volumes:
       - "/mnt:/mnt"
       - /etc/localtime:/etc/localtime:ro
